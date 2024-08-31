@@ -7,6 +7,7 @@ import Footer from '../components/Footer'
 import { banner , bestsellers, newArrivals} from '../data'
 import ProductList from '../components/Products/ProductList'
 import Newsletter from '../components/Newsletter'
+import Title from '../components/Products/Title'
 const home = () => {
   return (
     <div className='h-screen'>
@@ -16,9 +17,19 @@ const home = () => {
         </div>
         <div className='mx-24'>
         <Category/>
-        <ProductList title={"BEST SELLERS PRODUCTS"} desc={"Our Bestsellers, Your Must-Haves"} product={bestsellers}/>
+        
+        <div className='flex flex-col gap-20 my-10'>
+          <Title  title={"BEST SELLERS PRODUCTS"} desc={"Our Bestsellers, Your Must-Haves"} />
+          <ProductList product={bestsellers}/>
+        </div>
+       
         <Banner image={banner[0].img} title={banner[0].title} desc={banner[0].desc}/>
-        <ProductList title={"FEATURED PRODUCTS"} desc={"Showcasing the Best: Elevate Your Style Today!"} product={newArrivals}/>
+        <div className='flex flex-col gap-20 my-6'>
+          <Title title={"FEATURED PRODUCTS"} desc={"Showcasing the Best: Elevate Your Style Today!"}/>
+          <ProductList  product={newArrivals}/>
+        </div>
+       
+        
         </div>
 
         <Newsletter/>
