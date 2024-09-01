@@ -20,6 +20,11 @@ export default withMT({
 
       height: {
         400 : "400 px",
+      },
+
+      flex: {
+        '3': '3 3 0%',
+        '2': '2 2 0%',
       }
     },
   },

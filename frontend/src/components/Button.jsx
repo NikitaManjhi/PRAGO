@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Button = ({label}) => {
+const Button = ({label,color}) => {
   return (
     <div>
-     <button className='p-3 bg-transprent border  border-white transition-all ease-in duration-100 cursor-pointer text-white font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100'>{label}</button>
+     <button className='p-2 bg-transprent border transition-all ease-in duration-100 cursor-pointer  font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100 w-full' style={{color:color, borderColor:color}}>{label}</button>
     </div>
   )
 }
