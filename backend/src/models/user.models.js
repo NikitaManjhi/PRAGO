@@ -23,6 +23,7 @@ userSchema.methods.hashPassword = async function () {
   this.password = hash;
 };
 
+// middleware which runs before a document is saved
 userSchema.pre("save", async function(next){
   if(this.isModified()){
     await this.hashPassword();
