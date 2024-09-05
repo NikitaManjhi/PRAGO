@@ -6,7 +6,7 @@ const authRouter = require("./routes/auth.js");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 const orderRouter = require("./routes/order");
-// const stripeRoute = require("./routes/stripe");
+const stripeRouter = require("./routes/stripe");
 
 dotenv.config({
     path: "./.env"
@@ -30,6 +30,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/products",productRouter);
 app.use("/api/cart",cartRouter);
 app.use("/api/order",orderRouter);
+app.use("/api/checkout",stripeRouter)
 
-// app.use("/api/checkout", stripeRoute);
+
 module.exports=app
