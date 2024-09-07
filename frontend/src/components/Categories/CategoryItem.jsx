@@ -1,12 +1,20 @@
 import React from 'react';
 import Button from '../Button';
+
+import { useNavigate } from 'react-router-dom';
 const CategoryItem = ({ item }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (category)=>{
+    console.log(category);
+    navigate(`/products/${category}`)
+  }
   return (
     <div className="w-full">
       <div className="container flex flex-col justify-between items-center group cursor-pointer h-full">
         <div className="image relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
           <img src={item.img} alt="" className="w-full h-full object-cover"/>
-          <div className="overlay bg-black bg-opacity-50 flex justify-center items-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="overlay bg-black bg-opacity-50 flex justify-center items-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" onClick={()=>{handleClick(item.cat)}}>
             <Button label={"EXPLORE"}/>
           </div>
         </div>

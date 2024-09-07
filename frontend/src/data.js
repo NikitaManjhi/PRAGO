@@ -1,3 +1,29 @@
+export const categories = [
+  {
+    id: 1,
+    img: "https://i.pinimg.com/564x/26/c4/95/26c495959b13d320b3f376ec654a383a.jpg",
+    title: "WOMEN",
+    cat: 'women'
+  },
+  {
+    id: 2,
+    img: "https://i.pinimg.com/564x/03/d8/53/03d853e227a0bf8178484925de6e9d06.jpg",
+    title: "TOPS",
+    cat: 'tops'
+  },
+  {
+    id: 3,
+    img: "https://i.pinimg.com/564x/00/f2/0e/00f20e0ed34edf928f19c53fbca80261.jpg",
+    title: "KURTA",
+    cat:'kurta'
+  },
+  {
+    id: 4,
+    img: "https://i.pinimg.com/736x/da/b9/44/dab94413ab521201937e3ee3d40d200a.jpg",
+    title: "BOTTOM",
+    cat:"bottom"
+  }
+];
 
 export const sliderData = [
   {
@@ -20,33 +46,6 @@ export const sliderData = [
   },
 ];
 
-
-export const categories = [
-  {
-    id: 1,
-    img: "https://i.pinimg.com/564x/26/c4/95/26c495959b13d320b3f376ec654a383a.jpg",
-    title: "WOMEN",
-    cat: 'women'
-  },
-  {
-    id: 2,
-    img: "https://i.pinimg.com/564x/03/d8/53/03d853e227a0bf8178484925de6e9d06.jpg",
-    title: "CO-ORDS SET",
-    cat: 'coords'
-  },
-  {
-    id: 3,
-    img: "https://i.pinimg.com/564x/00/f2/0e/00f20e0ed34edf928f19c53fbca80261.jpg",
-    title: "KURTI",
-    cat:'kurti'
-  },
-  {
-    id: 4,
-    img: "https://i.pinimg.com/736x/da/b9/44/dab94413ab521201937e3ee3d40d200a.jpg",
-    title: "LEHENGA",
-    cat:"lehenga"
-  }
-];
 
 export const newArrivals = [
   {

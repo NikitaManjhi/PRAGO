@@ -1,15 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
+import { useLocation } from 'react-router-dom'
+import { publicRequest } from '../requestMethods'
 import Navbar from '../components/Header/Navbar'
 import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
-import Button from '../components/Button'
-const SingleProduct = ({product}) => {
-    const [color,setColor]=useState("black");
-    const [quantity, setQuantity]=useState(0);
-    const handleColor= (e)=>{
-        setColor(e.target.value);
-    }
+import { addProduct } from '../Redux/slice/cart'
+import { useDispatch } from 'react-redux'
 
+const SingleProduct = () => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const id=location.pathname.split("/")[2];
+    const [quantity, setQuantity]=useState(1);
+    const [product,setProduct]=useState({});
+    const [color,setColor]=useState("");
+    const [size,setSize]=useState("");
+
+    useEffect(()=>{
+        const getProduct=async ()=>{
+            try{
+                const res=await publicRequest.get(`/products/find/${id}`);
+                setProduct(res.data);
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+        getProduct();
+    },[id]);
+    
     const handleQuantity=(operation)=>{
         if(operation=="increment"){
             setQuantity(quantity+1);
@@ -18,27 +37,44 @@ const SingleProduct = ({product}) => {
             setQuantity(quantity-1);
         }
     }
+
+    const handleClick = ()=>{
+        dispatch(addProduct({...product,quantity,color,size}))
+    }
   return (
     <div className='h-screen'>
         <Navbar/>
         {/* Product info */}
         <div className='flex py-12 px-28  h-4/5'>
             <div className='flex-1 '>
-                <img src="https://img.faballey.com/images/Product/ICO00577Z/3.jpg" alt="" className='w-full h-full object-contain' />
+                <img src={product.img} alt="" className='w-full h-full object-contain' />
             </div>
             <div className='flex-1'>
-                <h1 className='font-medium text-2xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-                <p className='text-xl pt-6'>Rs. 4500</p>
+                <h1 className='font-medium text-2xl'>{product.title}</h1>
+                <h3>{product.desc}</h3>
+                <p className='text-xl pt-6'>Rs. {product.price}</p>
 
                 <div className='my-3'>
-                    <h3>SIZE</h3>
+                    <h3>COLOR</h3>
                     <ul  className='flex gap-2 pt-3'>
-                        <li className='border border-black p-1 w-16 flex justify-center items-center cursor-pointer scale-1 hover:scale-105'>XS</li>
-                        <li className='border border-black p-1 w-16 flex justify-center items-center cursor-pointer scale-1 hover:scale-105'>S</li>
-                        <li className='border border-black p-1 w-16 flex justify-center items-center cursor-pointer scale-1 hover:scale-105'>M</li>
-                        <li className='border border-black p-1 w-16 flex justify-center items-center cursor-pointer scale-1 hover:scale-105'>L</li>
-                        <li className='border border-black p-1 w-16 flex justify-center items-center cursor-pointer scale-1 hover:scale-105'>XL</li>
+                    {
+                        product.color?.map((color, index) => (
+                            <li key={index} className='w-6 h-6 rounded-full border border-gray-300 cursor-pointer hover:scale-105 transition duration-75' style={{ backgroundColor: color }} onClick={()=> setColor(color)} value={color}></li>
+                          ))
+                    }    
                     </ul>
+
+                    <h3 className='mt-5'>SIZE</h3>
+                    <ul  className='flex gap-2 pt-3'>
+                    {
+                        product.size?.map((size, index) => (
+                            <li key={index} className='border border-black p-1 w-12 text-center hover:scale-105 cursor-pointer transition duration-75' onClick={()=> setSize(size)} value={size}>{size}</li>
+                          ))
+                    }    
+                    </ul>
+
+                    
+                 
                 </div>
                 
                 <div className='my-3'>
@@ -51,19 +87,9 @@ const SingleProduct = ({product}) => {
                 </div>
 
                 <div className='flex gap-2'>
-                    <button className='p-3 bg-transprent border transition-all ease-in duration-100 cursor-pointer  font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100 w-44 border border-black'>Add to Cart</button>
-                    <button className='p-3 bg-transprent border transition-all ease-in duration-100 cursor-pointer  font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100 w-44 border border-black'>Buy Now</button>
+                    <button className='p-3 bg-transprent border transition-all ease-in duration-100 cursor-pointer  font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100 w-44 border border-black' onClick={handleClick}>Add to Cart</button>
+                    {/* <button className='p-3 bg-transprent border transition-all ease-in duration-100 cursor-pointer  font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100 w-44 border border-black'>Buy Now</button> */}
                 </div>
-
-                <div className='my-3'>
-                    <h3 className='font-medium text-md pb-2'>Product Description:</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda iusto iure mollitia porro, ex aperiam explicabo, distinctio incidunt ipsum blanditiis natus eveniet fuga, est nulla voluptas sit tempore nobis molestias.</p>
-                </div>
-                
-               
-                
-             
-
             </div>
         </div>
         

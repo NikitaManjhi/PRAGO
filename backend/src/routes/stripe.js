@@ -3,22 +3,22 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const {v4:uuidv4} = require("uuid");
 
 router.post("/payment", async (req, res) => {
-  const { product, token } = req.body;
+  const {token,amount } = req.body;
   const idempotencyKey = uuidv4();
 
   return stripe.customers
     .create({
-      email: token.email,
       source: token.id,
+      email: token.email,
     })
     .then((customer) => {
       stripe.paymentIntents.create(
         {
-          amount: product.price * 100,
+          amount: amount,
           currency: "usd",
           customer: customer.id,
           receipt_email: token.email,
-          description: `purchase of ${product.name}`,
+          // description: `purchase of ${product.name}`,
           shipping: {
             name: token.card.name,
             address: {

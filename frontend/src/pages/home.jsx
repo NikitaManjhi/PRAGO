@@ -9,6 +9,7 @@ import ProductList from '../components/Products/ProductList'
 import Newsletter from '../components/Newsletter'
 import Title from '../components/Products/Title'
 const home = () => {
+  const filter={}
   return (
     <div className='h-screen'>
         <Navbar/>
@@ -20,13 +21,13 @@ const home = () => {
         
         <div className='flex flex-col gap-20 my-10'>
           <Title  title={"BEST SELLERS PRODUCTS"} desc={"Our Bestsellers, Your Must-Haves"} />
-          <ProductList product={bestsellers}/>
+          <ProductList cat={"women"} filter={filter} sort={"new"} limit={4}/>
         </div>
        
         <Banner image={banner[0].img} title={banner[0].title} desc={banner[0].desc}/>
         <div className='flex flex-col gap-20 my-6'>
           <Title title={"FEATURED PRODUCTS"} desc={"Showcasing the Best: Elevate Your Style Today!"}/>
-          <ProductList  product={newArrivals}/>
+          <ProductList cat={"women"} filter={filter} sort={"new"} limit={4}/>
         </div>
        
         

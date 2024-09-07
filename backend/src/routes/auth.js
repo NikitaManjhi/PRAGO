@@ -98,7 +98,7 @@ router.post("/signin", async (req,res)=>{
         jwt: token,
       });
     } else {
-      res.status(400).send({
+      return res.status(400).send({
         msg: "Incorrect password",
       });
     }

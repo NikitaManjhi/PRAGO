@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate} from 'react-router-dom'
 import './App.css'
 import Home from './pages/home'
 import Products from './pages/Products'
@@ -8,22 +8,29 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Cart from './pages/Cart'
 import Payment from './components/pay'
+import { useSelector } from 'react-redux'
+
+
+function App() {
+  
+const user = useSelector((state)=> state.user.currentUser);
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home/>
   },
   {
-    path: '/products',
+    path: '/products/:category',
     element: <Products/>
   },
   {
-    path: '/product',
+    path: '/product/:id',
     element: <SingleProduct/>
   },
   {
     path: '/login',
-    element: <Login/>
+    element: user? <Navigate to="/"/> : <Login/>
   },
   {
     path: '/register',
@@ -38,7 +45,7 @@ const router = createBrowserRouter([
     element: <Payment/>
   }
 ])
-function App() {
+
   return (
     <>
       <RouterProvider router={router}/>
