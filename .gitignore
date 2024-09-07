@@ -2,3 +2,5 @@
 /backend/.env
 /frontend/node_modules
 /frontend/.env
+/admin/node_modules
+/admin/.env
