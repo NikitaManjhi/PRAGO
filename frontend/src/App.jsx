@@ -7,7 +7,6 @@ import SingleProduct from './pages/SingleProduct'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Cart from './pages/Cart'
-import Payment from './components/pay'
 import { useSelector } from 'react-redux'
 
 
@@ -40,10 +39,7 @@ const router = createBrowserRouter([
     path: '/cart',
     element: <Cart/>
   },
-  {
-    path: '/payment',
-    element: <Payment/>
-  }
+
 ])
 
   return (
