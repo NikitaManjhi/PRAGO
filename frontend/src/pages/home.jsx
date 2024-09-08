@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Header/Navbar'
-import Slider from '../components/slider'
+import Slider from '../components/Slider'
 import Category from '../components/Categories/Category'
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
