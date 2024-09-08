@@ -11,7 +11,7 @@ useEffect(()=>{
     const getProduct=async()=>{
       try{
         const res=await axios.get(
-          cat? `http://localhost:3000/api/products?category=${cat}`:
+          cat? `https://prago-backend.onrender.com/api/products?category=${cat}`:
           "http://localhost:3000/api/products"
         );
         setProducts(res.data);
