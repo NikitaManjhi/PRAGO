@@ -1,4 +1,4 @@
-// src/components/Slider.js
+
 import React, { useState } from 'react';
 import Slide from './Slide';
 import { KeyboardArrowLeftOutlined, KeyboardArrowRightOutlined } from '@mui/icons-material';
@@ -20,18 +20,19 @@ const Slider = () => {
   };
 
   return (
-    <div className="relative h-full overflow-hidden">
-     
+    <div className="relative h-[620px] overflow-hidden md:h-[600px] sm:h-[400px] xs:h-[300px]">
+      {/* Previous Button */}
       <div
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 ml-4 z-10 bg-white rounded-full p-2 opacity-35 hover:opacity-50 cursor-pointer transition-all ease-in duration-150"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 ml-4 z-10 bg-white rounded-full p-2 opacity-60 hover:opacity-80 cursor-pointer transition-all ease-in duration-150"
         onClick={handlePrev}
       >
         <KeyboardArrowLeftOutlined fontSize="large" />
       </div>
 
-     
+      {/* Slider */}
       <div
-        className="flex h-full transition-transform ease-in-out duration-500 tran"  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        className="flex h-full transition-transform ease-in-out duration-500"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {sliderData.map((image) => (
           <div key={image.id} className="w-full flex-shrink-0">
@@ -40,9 +41,9 @@ const Slider = () => {
         ))}
       </div>
 
-      
+      {/* Next Button */}
       <div
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-4 z-10 bg-white rounded-full p-2 cursor-pointer opacity-35 hover:opacity-50 transition-all ease-in duration-150"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-4 z-10 bg-white rounded-full p-2 cursor-pointer opacity-60 hover:opacity-80 transition-all ease-in duration-150"
         onClick={handleNext}
       >
         <KeyboardArrowRightOutlined fontSize="large" />
