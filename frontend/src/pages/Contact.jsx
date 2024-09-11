@@ -19,9 +19,6 @@ const Contact = () => {
             <p className='font-semibold text-2xl text-gray-600'>Careers At Prago</p>
             <p className='text-gray-500 text-lg'>Learn more about our forms and job openings.</p>
             <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Explore Jobs</button>
-
-
-
         </div>
     </div>
     <Newsletter/>

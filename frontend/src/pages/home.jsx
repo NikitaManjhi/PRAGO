@@ -15,7 +15,7 @@ const home = () => {
     <div>
           <Slider/>
         
-        <div className='mx-24'>
+       
         <Category/>
         
         <div className='flex flex-col gap-20 my-10'>
@@ -30,7 +30,7 @@ const home = () => {
         </div>
        
         
-        </div>
+    
         <Policy />
         <Newsletter />
 

@@ -1,102 +1,160 @@
-import React, { useState , useEffect} from 'react'
-import { useLocation } from 'react-router-dom'
-import { publicRequest } from '../requestMethods'
-import Navbar from '../components/Header/Navbar'
-import Newsletter from '../components/Newsletter'
-import Footer from '../components/Footer'
-import { addProduct } from '../Redux/slice/cart'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { publicRequest } from '../requestMethods';
+import { addProduct } from '../Redux/slice/cart';
+import { useDispatch } from 'react-redux';
+import Navbar from '../components/Header/Navbar';
+import Newsletter from '../components/Newsletter';
+import Footer from '../components/Footer';
 
 const SingleProduct = () => {
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const id=location.pathname.split("/")[2];
-    const [quantity, setQuantity]=useState(1);
-    const [product,setProduct]=useState({});
-    const [color,setColor]=useState("");
-    const [size,setSize]=useState("");
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const id = location.pathname.split('/')[2];
+  
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
+  
+  // Fetch product details
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await publicRequest.get(`/products/find/${id}`);
+        setProduct(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
-    useEffect(()=>{
-        const getProduct=async ()=>{
-            try{
-                const res=await publicRequest.get(`/products/find/${id}`);
-                setProduct(res.data);
-            }
-            catch(err){
-                console.log(err);
-            }
-        }
-        getProduct();
-    },[id]);
-    
-    const handleQuantity=(operation)=>{
-        if(operation=="increment"){
-            setQuantity(quantity+1);
-        }
-        if(operation=="decrement" && quantity>1){
-            setQuantity(quantity-1);
-        }
+  // Handle quantity increment and decrement
+  const handleQuantity = (type) => {
+    if (type === 'increment') {
+      setQuantity((prev) => prev + 1);
+    } else if (type === 'decrement' && quantity > 1) {
+      setQuantity((prev) => prev - 1);
     }
+  };
 
-    const handleClick = ()=>{
-        dispatch(addProduct({...product,quantity,color,size}))
-    }
-  return (
-    <div className='h-screen'>
-        <Navbar/>
-        {/* Product info */}
-        <div className='flex py-12 px-28  h-4/5'>
-            <div className='flex-1 '>
-                <img src={product.img} alt="" className='w-full h-full object-contain' />
+  // Handle Add to Cart
+  const handleAddToCart = () => {
+    dispatch(addProduct({ ...product, quantity, selectedColor, selectedSize }));
+  };
+
+  return product ? (
+    <div>
+      <Navbar />
+      <div className="container mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          
+          {/* Product Image */}
+          <div className="flex justify-center">
+            <img
+              src={product.img}
+              alt={product.title}
+              className="w-full max-w-md h-auto object-contain"
+            />
+          </div>
+          
+          {/* Product Details */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <h1 className="text-3xl font-bold">{product.title}</h1>
+              <p className="text-lg mt-4 text-gray-600">{product.desc}</p>
+              <p className="text-2xl font-semibold mt-6">₹{product.price}</p>
             </div>
-            <div className='flex-1'>
-                <h1 className='font-medium text-2xl'>{product.title}</h1>
-                <h3>{product.desc}</h3>
-                <p className='text-xl pt-6'>Rs. {product.price}</p>
 
-                <div className='my-3'>
-                    <h3>COLOR</h3>
-                    <ul  className='flex gap-2 pt-3'>
-                    {
-                        product.color?.map((color, index) => (
-                            <li key={index} className='w-6 h-6 rounded-full border border-gray-300 cursor-pointer hover:scale-105 transition duration-75' style={{ backgroundColor: color }} onClick={()=> setColor(color)} value={color}></li>
-                          ))
-                    }    
-                    </ul>
-
-                    <h3 className='mt-5'>SIZE</h3>
-                    <ul  className='flex gap-2 pt-3'>
-                    {
-                        product.size?.map((size, index) => (
-                            <li key={index} className='border border-black p-1 w-12 text-center hover:scale-105 cursor-pointer transition duration-75' onClick={()=> setSize(size)} value={size}>{size}</li>
-                          ))
-                    }    
-                    </ul>
-
-                    
-                 
-                </div>
-                
-                <div className='my-3'>
-                <h3 className='mb-2'>Quantity</h3>
-                <div className='border border-black flex justify-center items-center w-20 flex justify-between p-2' >
-                    <div onClick={()=>handleQuantity("decrement")} className='cursor-pointer'>-</div>
-                    <div className='font-md'>{quantity}</div>
-                    <div onClick={()=>{handleQuantity("increment")}} className='cursor-pointer'>+</div>
-                </div>
-                </div>
-
-                <div className='flex gap-2'>
-                    <button className='p-3 bg-transprent border transition-all ease-in duration-100 cursor-pointer  font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100 w-44 border border-black' onClick={handleClick}>Add to Cart</button>
-                    {/* <button className='p-3 bg-transprent border transition-all ease-in duration-100 cursor-pointer  font-normal rounded-sm tracking-wider scale-1 hover:scale-105 transition-all ease-in duration-100 w-44 border border-black'>Buy Now</button> */}
-                </div>
+            {/* Color Selection */}
+            <div className="">
+              <h3 className="font-medium">COLOR</h3>
+              <div className="flex gap-3 mt-2">
+                {product.color?.map((color, index) => (
+                  <div
+                    key={index}
+                    className={`w-8 h-8 rounded-full cursor-pointer border-2 transition-transform duration-150 ease-in-out
+                    ${selectedColor === color ? 'border-black scale-110' : 'border-gray-300'}`}
+                    style={{ backgroundColor: color }}
+                    onClick={() => setSelectedColor(color)}
+                  />
+                ))}
+              </div>
             </div>
+
+            {/* Size Selection */}
+            <div className="my-1">
+              <h3 className="font-medium">SIZE</h3>
+              <div className="flex gap-3 mt-2">
+                {product.size?.map((size, index) => (
+                  <div
+                    key={index}
+                    className={`p-2 border cursor-pointer transition-transform duration-150 ease-in-out
+                    ${selectedSize === size ? 'border-black scale-105 bg-gray-100' : 'border-gray-300'}`}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quantity Selector */}
+            <div className="my-1">
+              <h3 className="font-medium mb-2">Quantity</h3>
+              <div className="flex items-center gap-4">
+                <button
+                  className="w-8 h-8 border border-gray-400 flex justify-center items-center"
+                  onClick={() => handleQuantity('decrement')}
+                >
+                  -
+                </button>
+                <span className="text-lg">{quantity}</span>
+                <button
+                  className="w-8 h-8 border border-gray-400 flex justify-center items-center"
+                  onClick={() => handleQuantity('increment')}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Add to Cart Button */}
+            <button
+              className="mt-5 py-3 px-6 bg-black text-white font-medium tracking-wider hover:scale-105 transition duration-200"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </button>
+            <hr className='mt-8 sm:w-4/5'/>
+            <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
+                <p>100% Original Product</p>
+                <p>Cash on Delivery is available on this product.</p>
+                <p>Easy return and exchange policy within 7 days.</p>
+            </div>
+          </div>
         </div>
-        
-        <Newsletter />
-        <Footer/>
-    </div>
-  )
-}
+                {/* description */}
+        <div className='mt-20'>
+                <div className='flex'>
+                    <b className='border px-5 py-3 text-sm'>Description</b>
+                    <b className='border px-5 py-3 text-sm'>Reviews</b>
+                </div>
+                <div className='flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500'>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos doloribus nemo asperiores optio quibusdam sunt omnis reprehenderit cum accusamus tenetur odit hic neque, culpa, quod nesciunt illum qui repellendus eum!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+        </div>
 
-export default SingleProduct
+        {/* Related Products */}
+      </div>
+      <Newsletter />
+
+    </div>
+  ) : (
+    <div>Loading...</div>
+  );
+};
+
+export default SingleProduct;

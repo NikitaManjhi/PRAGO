@@ -10,7 +10,6 @@ import Navbar from './components/Header/Navbar'
 import Cart from './pages/Cart'
 import { useSelector } from 'react-redux'
 import Footer from './components/Footer'
-import Newsletter from './components/Newsletter'
 import About from './pages/About'
 import Contact from './pages/Contact'
 
@@ -54,7 +53,7 @@ const router = createBrowserRouter([
         {/* <Route path='/collection' element={<Collection/>}/> */}
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
-        {/* <Route path='/proudct/:productId' element={<Product/>}/> */}
+        <Route path='/product/:productId' element={<SingleProduct/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/login' element={<Login/>}/>
         {/* <Route path='/orders' element={<Orders/>}/> */}
