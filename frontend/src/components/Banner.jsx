@@ -2,7 +2,7 @@ import React from 'react'
 
 const Banner = ({image,title,desc}) => {
   return (
-    <div className="container h-screen py-12">
+    <div className="sm:flex-row">
         <div className="banner flex flex-1 h-full bg-brown">
             <img src={image} alt="" className=' w-1/2 h-full object-cover'/>
             <div className="details  w-1/2 flex flex-col justify-center items-center px-10 ">

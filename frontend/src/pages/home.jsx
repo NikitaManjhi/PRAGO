@@ -8,14 +8,13 @@ import { banner , bestsellers, newArrivals} from '../data'
 import ProductList from '../components/Products/ProductList'
 import Newsletter from '../components/Newsletter'
 import Title from '../components/Products/Title'
+import Policy from '../components/Policy'
 const home = () => {
   const filter={}
   return (
-    <div className='h-screen'>
-        <Navbar/>
-        <div className='mx-24 h-5/6'>
+    <div>
           <Slider/>
-        </div>
+        
         <div className='mx-24'>
         <Category/>
         
@@ -32,10 +31,9 @@ const home = () => {
        
         
         </div>
+        <Policy />
+        <Newsletter />
 
-        <Newsletter/>
-
-        <Footer/>
     </div>
   )
 }
