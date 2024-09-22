@@ -16,6 +16,7 @@ export default withMT({
         brown: '#DEAC80',
         beige: '#FFF7F1',
         text: '#252525',
+        
       },
 
       height: {

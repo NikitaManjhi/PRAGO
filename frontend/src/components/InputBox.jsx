@@ -2,11 +2,11 @@ import React from 'react'
 
 const InputBox = ({label,onChange,type}) => {
   return (
-    <div>
-        <input type={type} placeholder={label} className='p-2 border border-black w-96 my-2'
-        onChange={onChange}
+  
+        <input type={type} placeholder={label} className='w-full px-3 py-2 border border-gray-800'
+        onChange={onChange} required
         />
-    </div>
+
   )
 }
 

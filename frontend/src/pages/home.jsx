@@ -7,30 +7,22 @@ import Footer from '../components/Footer'
 import { banner , bestsellers, newArrivals} from '../data'
 import ProductList from '../components/Products/ProductList'
 import Newsletter from '../components/Newsletter'
-import Title from '../components/Products/Title'
+import Title from '../components/Title'
 import Policy from '../components/Policy'
-const home = () => {
+const Home = () => {
   const filter={}
   return (
     <div>
-          <Slider/>
-        
-       
+        <Slider/>
         <Category/>
-        
-        <div className='flex flex-col gap-20 my-10'>
-          <Title  title={"BEST SELLERS PRODUCTS"} desc={"Our Bestsellers, Your Must-Haves"} />
-          <ProductList cat={"women"} filter={filter} sort={"new"} limit={4}/>
+        <div className='mb-20'>
+        <ProductList cat={"women"} filter={filter} sort={"new"} title={"BEST SELLERS"} desc={"Our Bestsellers, Your Must-Haves"} limit={5}/>
         </div>
-       
         <Banner image={banner[0].img} title={banner[0].title} desc={banner[0].desc}/>
-        <div className='flex flex-col gap-20 my-6'>
-          <Title title={"FEATURED PRODUCTS"} desc={"Showcasing the Best: Elevate Your Style Today!"}/>
-          <ProductList cat={"women"} filter={filter} sort={"new"} limit={4}/>
+        <div className='mt-20'>
+        <ProductList cat={"women"} filter={filter} sort={"new"} limit={5} title={"NEW ARRIVALS"} desc={"Discover our latest collection with stylish designs and unmatched quality, just arrived to elevate your wardrobe!"}/>
+
         </div>
-       
-        
-    
         <Policy />
         <Newsletter />
 
@@ -38,4 +30,4 @@ const home = () => {
   )
 }
 
-export default home
+export default Home

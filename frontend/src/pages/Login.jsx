@@ -20,27 +20,27 @@ const Login = () => {
   
 
   return (
-    <div>
-    <Navbar />
-    <div className='flex justify-center items-center p-16'>
-    <div className='flex items-center flex-col justify-center border border-black w-fit h p-12'>
-        <h1 className='font-semibold text-3xl tracking-wider mb-6'>LOGIN</h1>
-        <div className=''>
+    <form className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800 '>
+   
+    <div className='inline-flex items-center gap-2 mb-2 mt-10'>
+          <h1 className='text-3xl'>LOGIN</h1>
+          <hr className='border-none h-[1.5px] w-8 bg-gray-800'/>
+        </div>
+        
         <InputBox label={"Email"} onChange={(e)=>setEmail(e.target.value)} type={"text"}/>
         <InputBox label={"Password"}  onChange={(e)=>setPassword(e.target.value)} type={"password"}/>
-        </div>
-        <button className='w-44 border-black border p-2 mt-6 text-lg' onClick={handleClick} disabled={isFetching}>Create</button>
       
-        <div className='w-full flex justify-between mt-10'>
-          <Link> <div className='underline cursor-pointer'>Forgot Password?</div></Link>
-          <Link> <div className='underline cursor-pointer'>Create new account</div></Link>
+        <div className='w-full flex justify-between mt-[-8px] text-sm'>
+            <p className='cursor-pointer'>Forgot Password ?</p>
+            <Link to='/register'>
+            <p>Create Account</p>
+            </Link>
         </div>
 
-    </div>
-    </div>
-    <Newsletter />
-    <Footer />
-</div>
+        <button className='bg-black text-white font-light px-8 py-2 mt-4' onClick={handleClick} disabled={isFetching}>Login</button>
+
+   
+</form>
   )
 }
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Product from "./Product";
+import ProductItem from "./ProductItem";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Title from "../Title";
+import SubTitle from "./SubTitle";
 
-const ProductList = ({ cat, filter, sort, limit }) => {
+const ProductList = ({ cat, filter, sort, limit,title,desc }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -51,16 +53,22 @@ const ProductList = ({ cat, filter, sort, limit }) => {
   }, [sort]);
 
   return (
-    <div className="p-4">
-      <div className="flex flex-wrap ">
-        {filteredProducts.length > 0 ? (
+    <div>
+      <div className="text-center text-3xl mb-6">
+        {cat?<Title title={title}/>:<Title title={"Collections"}/>}
+        {desc?<SubTitle desc={desc}/>:<div></div>}
+        
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+      {filteredProducts.length > 0 ? (
           (limit ? filteredProducts.slice(0, limit) : filteredProducts).map(
-            (productItem, index) => <Product item={productItem} key={index} />
+            (product, index) => <ProductItem item={product} key={index} />
           )
         ) : (
-          <p>No products found</p>
+          <p>No products found....</p>
         )}
       </div>
+    
     </div>
   );
 };

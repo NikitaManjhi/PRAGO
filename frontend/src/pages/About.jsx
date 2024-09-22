@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div>
       <div className="text-3xl text-center pt-8 border-t">
-        <Title text1={"ABOUT"} text2={"US"} />
+        <Title title={"ABOUT US"} />
       </div>
       <div className="my-10 flex flex-col md:flex-row gap-16">
         <img
@@ -50,7 +50,7 @@ const About = () => {
       </div>
 
       <div className="text-4xl py-4 text-center">
-        <Title text1={"WHY"} text2={"CHOOSE US"} />
+        <Title title={"WHY CHOOSE US"}/>
       </div>
 
       <div className="flex flex-col md:flex-row text-sm mb-20 gap-8 justify-center">

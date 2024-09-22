@@ -3,7 +3,7 @@ import { assets } from '../assets/assets';
 
 const Newsletter = () => {
   return (
-    <div className='text-center bg-gray-50 py-10'>
+    <div className='text-center bg-gray-200 py-10 '>
       <p className='text-2xl font-medium text-gray-800'>Subscribe now & get 20% off.</p>
       <p className='text-gray-400 mt-3'>Join our mailing list to stay updated on our latest products and promotions.</p>
       <form action="" className='w-full sm:w-1/2 flex items-center gap-3 mx-auto my-6 border rounded-md overflow-hidden'>
