@@ -9,7 +9,7 @@ import ProductList from '../components/Products/ProductList'
 import Newsletter from '../components/Newsletter'
 import Title from '../components/Title'
 import Policy from '../components/Policy'
-const Home = () => {
+const home = () => {
   const filter={}
   return (
     <div>
@@ -30,4 +30,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default home
